@@ -3,7 +3,10 @@
  <head>
   <title>Title</title>
   <script>
-    
+    if (document.createElement("input").webkitSpeech === undefined) 
+    {
+	     alert("Speech input is not supported in your browser.");
+    }
   </script>
  </head>
  <body>
