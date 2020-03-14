@@ -25,13 +25,17 @@
 		    {
           if (result[0].transcript == "daniel" || result[0].transcript == "Daniel")
           {
-            alert(result[0].transcript + " is correct!");
-          }
-        }   
-		    else 
-		    {
-          console.log('Interim result', result[0].transcript);
-        }
+            var password = prompt("Please enter your password " + result[0].transcript + ":");
+            if (password == "1234")
+            {
+              alert("You're in!")
+            }
+            
+            else
+            {
+              alert("Incorrect Passcode!")
+            }
+         }
     };
    
    // Start listening...
