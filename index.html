@@ -3,36 +3,40 @@
  <head>
   <title>Voice Input</title>
   <script>
-          function dictateText()
-          {
+    function dictateText()
+    {
       // This API is currently prefixed in Chrome
       var SpeechRecognition = (window.SpeechRecognition || window.webkitSpeechRecognition);
-     // Create a new recognizer
-     var recognizer = new SpeechRecognition();
+      // Create a new recognizer
+      var recognizer = new SpeechRecognition();
 
-     // Start producing results before the person has finished speaking
-    recognizer.interimResults = true;
+      // Start producing results before the person has finished speaking
+      recognizer.interimResults = true;
 
-    // Set the language of the recognizer
-    recognizer.lang = 'en-US';
+      // Set the language of the recognizer
+      recognizer.lang = 'en-US';
 
-    // Define a callback to process results
-   recognizer.onresult = function (event) 
-	 {
-     var result = event.results[event.resultIndex];
-     if (result.isFinal) 
-		 {
-       alert('You said: ' + result[0].transcript);
-     }   
-		 else 
-		 {
-       console.log('Interim result', result[0].transcript);
-     }
-   };
-
-// Start listening...
-recognizer.start();
+      alert("Please say your name:")
+      // Define a callback to process results
+      recognizer.onresult = function (event) 
+	    {
+        var result = event.results[event.resultIndex];
+        if (result.isFinal) 
+		    {
+          if (result[0].transcript == "daniel" || result[0].transcript == "Daniel")
+          {
+            alert(result[0].transcript + " is correct!");
           }
+        }   
+		    else 
+		    {
+          console.log('Interim result', result[0].transcript);
+        }
+    };
+   
+   // Start listening...
+   recognizer.start();
+   }
   </script>
  </head>
  <body>
