@@ -3,22 +3,37 @@
  <head>
   <title>Title</title>
   <script>
-    if (document.createElement("input").webkitSpeech === undefined) 
-    {
-	     alert("Speech input is not supported in your browser.");
-    }
+		dictateText()
+		{
+      // This API is currently prefixed in Chrome
+      var SpeechRecognition = (window.SpeechRecognition || window.webkitSpeechRecognition);
+     // Create a new recognizer
+     var recognizer = new SpeechRecognition();
+
+     // Start producing results before the person has finished speaking
+    recognizer.interimResults = true;
+
+    // Set the language of the recognizer
+    recognizer.lang = 'en-US';
+
+    // Define a callback to process results
+   recognizer.onresult = function (event) 
+	 {
+     var result = event.results[event.resultIndex];
+     if (result.isFinal) 
+		 {
+       alert('You said: ' + result[0].transcript);
+     }   
+		 else 
+		 {
+       console.log('Interim result', result[0].transcript);
+     }
+   };
+
+// Start listening...
+recognizer.start();
   </script>
  </head>
  <body>
-  <input type="text" x-webkit-speech />
-  
-  <input type="text" list="text_editors">
-   <datalist id="text_editors">
-    <option value="Bob"></option>
-    <option value="Jim"></option>
-    <option value="Jerry"></option>
-    <option value="Jim"></option>
-   </datalist>
-  <p><em>For example;
-   </em> Sublime Text</p>
+	 <button onclick="dictateText()">Search by Voice</button>
  </body>
